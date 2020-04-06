@@ -42,6 +42,41 @@ YouTube %>%
   summarise(count = n())
 ```
 
+```{r}
+YouTube %>%
+  ggplot(aes(x = channeltype, y = 1)) + 
+  geom_point(alpha = 0.02, position = "jitter" ) +  
+  xlab("ChannelType") + 
+  ylab("") + theme_bw() + scale_color_grey()  
+```
+```{r}
+YouTube %>% 
+  select(name, country, channeltype) 
+```
+```{r}
+YouTube %>%
+  ggplot(aes(x = name, y = country, shape = channeltype)) +
+  geom_point() 
+
+```
+
+```{r}
+YouTube %>% 
+  filter(channeltype != "NA") 
+```
+```{r}
+YouTube %>%
+  group_by( channeltype ) %>% 
+  summarise( total = n() ) %>%
+  arrange( desc(total) ) 
+```
+```{r}
+YouTube %>%
+  group_by( userID ) %>% 
+  summarise( total = n() ) %>%
+  arrange( desc(total) ) 
+```
+
 
 ```{r}
 View(USvideos_modified)
@@ -53,3 +88,5 @@ USvideos_modified%>%
   summarise(count = n())
 
 ```
+
+Based on these datasets it can be infered that Entertainment youtubers are popular and have a stronger presence then any other category on Youtube.
