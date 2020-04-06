@@ -5,7 +5,17 @@ date: "04/03/2020"
 output: html_notebook
 ---
 
-
+```{r}
+# clean up workspace environment
+rm(list = ls())
+# all packages used for the assignment
+library(mosaic)
+library(tidyverse)
+library(DataComputing)
+library(tidyr)
+library(lubridate)
+library(ggplot2)
+```
 
 * Guiding Question - How do youtubers gain followers and popularity?  
 
@@ -20,5 +30,14 @@ output: html_notebook
 Each case in "YouTube Trending Video Statistics with Subscriber Data" represents the trending youtube videos with respect to subscribers. There is also over a thousand cases in this dataset as well.
 
 * Some variables that I plan on using are the #subscribers, name, #followers, #videos, #views, and #likes.
+My primary datasource is Youtube.csv. And my secondary is USvideos_modified.
+
+```{r}
+View(YouTube)
+```
 
 
+
+```{r}
+View(USvideos_modified)
+```
