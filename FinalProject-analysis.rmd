@@ -36,8 +36,20 @@ My primary datasource is Youtube.csv. And my secondary is USvideos_modified.
 View(YouTube)
 ```
 
+```{r}
+YouTube %>% 
+  group_by(userID) %>%
+  summarise(count = n())
+```
 
 
 ```{r}
 View(USvideos_modified)
+```
+
+```{r}
+USvideos_modified%>%
+  group_by(views) %>%
+  summarise(count = n())
+
 ```
