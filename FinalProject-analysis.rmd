@@ -17,7 +17,7 @@ library(lubridate)
 library(ggplot2)
 ```
 
-* Guiding Question - How do youtubers gain followers and popularity?  
+* Guiding Question - What are the factors that make a youtube channel successful. 
 
 * I found these data sources from an website called Kaggle.
 
@@ -33,72 +33,92 @@ Each case in "YouTube Trending Video Statistics with Subscriber Data" represents
 My primary datasource is Youtube.csv. And my secondary is USvideos_modified.
 
 
-###Primary Source
+
+
+#Loaded YouTube and USvideos_modified Data
 ```{r}
-YouTube %>%
-  head(20)
+View(YouTube)
+library(readr)
+YouTube <- read_csv("YouTube.csv")
 ```
 
-###Secondary Source
+#Loaded USvideos_modified
+```{r}
+View(USvideos_modified)
+library(readr)
+USvideos_modified <- read_csv("USvideos_modified.csv")
+```
+# A Youtube channels and their videos overall summary
+```{r}
+YouTube %>%
+summary(YouTube)
+```
+
+```{r}
+USvideos_modified%>%
+  summary(USvideos_modified)
+```
+
+
+
+# A simple summary of the count of number of youtube channels.
+```{r}
+YouTube %>%
+  summarise(count = n())
+```
+# First 20 videos on Youtube (brief description on the content on Youtube)
 ```{r}
 USvideos_modified %>%
   head(20)
 ```
 
-
-
+#Join operation to better understand the youtuber 
 ```{r}
 YouTube %>% 
-  group_by(userID) %>%
-  summarise(count = n())
+  select(userID, `userID-href`)
+```
+# A tidy form of the data to show that userId is directly correlated to name. It also give a sense of what uploads users are making
+```{r}
+Youtuber <- 
+  YouTube %>%
+  select(userID, `userID-href`) %>% 
+  left_join(YouTube %>% select(name, uploads),
+            by = c("userID" = "name")) 
+print(Youtuber)
+```
+
+
+
+#The maximum and mininum number of views per channel are shown in the figure below.
+```{r}
+YouTube %>%
+  summarise(averViews  = mean(videoviews, na.rm=TRUE),
+            greatestViews = max(videoviews, na.rm = TRUE),
+            leastViews = min(videoviews, na.rm=TRUE))
 ```
 
 ```{r}
 YouTube %>%
-  ggplot(aes(x = channeltype, y = 1)) + 
-  geom_point(alpha = 0.02, position = "jitter" ) +  
-  xlab("ChannelType") + 
-  ylab("") + theme_bw() + scale_color_grey()  
+  group_by(channeltype) %>%
+  summarise(avg = mean(uploads, na.rm = TRUE), 
+            greatestViews = max(videoviews, na.rm = TRUE),
+            MostSubs = max(subscribers, na.rm = TRUE),
+            money = max(YearlyEarnings, na.rm = TRUE)
+            )
 ```
-```{r}
-YouTube %>% 
-  select(name, country, channeltype) 
-```
-```{r}
-YouTube %>%
-  ggplot(aes(x = name, y = country, shape = channeltype)) +
-  geom_point() 
-
-```
-
-```{r}
-YouTube %>% 
-  filter(channeltype != "NA") 
-```
-```{r}
-YouTube %>%
-  group_by( channeltype ) %>% 
-  summarise( total = n() ) %>%
-  arrange( desc(total) ) 
-```
-```{r}
-YouTube %>%
-  group_by( userID ) %>% 
-  summarise( total = n() ) %>%
-  arrange( desc(total) ) 
-```
+# From the figure above it can be inferred that the higher the views and subscribers the higher the channel's revenue.
 
 
-```{r}
-View(USvideos_modified)
-```
 
-```{r}
-USvideos_modified%>%
-  group_by(views) %>%
-  summarise(count = n())
 
-```
+
+
+
+
+
+
+
+
 
 Based on these datasets it can be infered that Entertainment youtubers are popular and have a stronger presence then any other category on Youtube.
 
