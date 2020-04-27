@@ -30,22 +30,22 @@ The secondary data source was inspected at line 43.
 
 
 (A) .Rmd Line number(s) for general data wrangling: 
-
+Line numbers: 
 
 (B) .Rmd Line number(s) for a join operation: 
-
+Line numbers:
 
 (C) .Rmd Line number(s) for a spread or gather operation (or equivalent):
 
 
 (D) .Rmd Line number(s) for use of regular expressions: 
-
+Line numbers
 
 (E) .Rmd Line number(s) for use of reduction and/or transformation functions: 
-
+Line numbers:
 
 (F) .Rmd Line number(s) for use of user-defined functions: 
-
+Line numbers:
 
 (G) .Rmd Line number(s) for use of loops and/or control flow: 
 

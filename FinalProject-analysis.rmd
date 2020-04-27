@@ -78,7 +78,11 @@ USvideos_modified %>%
 USvideos_modified %>%
   head(20)
 ```
-
+#First 20 Youtube channels on Youtube
+```{r}
+YouTube %>%
+  head(20)
+```
 #Join operation to better understand the youtuber 
 ```{r}
 YouTube %>% 
@@ -120,14 +124,15 @@ YouTube %>%
 
 #At first glance at looking at YouTube.csv the monthly and yearly earning confused me a bit. I thought for a second it was a difference. By changing the"-" to "to" it elaborates the data further.
 ```{r}
-
 YouTube %>%
   mutate(YearlyEarnings = gsub("-", "to", YearlyEarnings),
          (MonthlyEarnings = gsub("-", "to", MonthlyEarnings)))
 ```
 
 ```{r}
- 
+ YouTube %>%
+  ggplot(aes(x = grade, y = channeltype)) +
+  geom_line(aes(linetype = YearlyEarnings))
 ```
 
 
