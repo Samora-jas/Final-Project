@@ -129,13 +129,27 @@ YouTube %>%
          (MonthlyEarnings = gsub("-", "to", MonthlyEarnings)))
 ```
 
+
+
 ```{r}
- YouTube %>%
-  ggplot(aes(x = grade, y = channeltype))
+ggplot(YouTube, aes(x = channeltype, group = grade) ) + 
+  geom_density(aes(color = grade, fill = grade), alpha = 0.5) +
+  xlab("Channel") + 
+  ylab("Grade") + 
+  theme(legend.position = "top")
 ```
+#From the figure above it can be inferred that channeltype and grade have no direct correlation. Which furthers the analysis being you can have any type of channel and still be successful.
 
-
-
+```{r}
+NCHS %>%
+  ggplot(aes(y = weight, x = ageGroup)) + 
+  geom_violin(fill = "gray") + 
+  facet_wrap( ~ sex ) +
+  ylab("Weight (kg)") + 
+  xlab( "Age Group (yrs)") + 
+  theme(legend.position = "top") +  
+  theme(axis.text.x = element_text(angle = 60, hjust = 1)) 
+```
 
 
 
