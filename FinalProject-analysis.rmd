@@ -131,8 +131,7 @@ YouTube %>%
 
 ```{r}
  YouTube %>%
-  ggplot(aes(x = grade, y = channeltype)) +
-  geom_line(aes(linetype = YearlyEarnings))
+  ggplot(aes(x = grade, y = channeltype))
 ```
 
 
