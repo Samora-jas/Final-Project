@@ -140,21 +140,21 @@ ggplot(YouTube, aes(x = channeltype, group = grade) ) +
 ```
 #From the figure above it can be inferred that channeltype and grade have no direct correlation. Which furthers the analysis being you can have any type of channel and still be successful.
 
+
+#There are alot of cases in this data source the jitter function will allow us to see where most of the points lie.
 ```{r}
-NCHS %>%
-  ggplot(aes(y = weight, x = ageGroup)) + 
-  geom_violin(fill = "gray") + 
-  facet_wrap( ~ sex ) +
-  ylab("Weight (kg)") + 
-  xlab( "Age Group (yrs)") + 
-  theme(legend.position = "top") +  
-  theme(axis.text.x = element_text(angle = 60, hjust = 1)) 
+YouTube %>%
+  ggplot(aes(x = grade, y = 1)) + 
+  geom_point(alpha = 0.02, position = "jitter" ) +  
+  xlab("Grade") + 
+  ylab("") + theme_bw() + scale_color_grey() 
 ```
 
+#It can be inferred from this graphic that newer youtubers that automatically get a lower grade because most of the points are lower then B. There are dense points at B and A because it is the people that continue that succeed and get higher scores. Conclusion-The higher your score on youtube more successful you are. For most people it is hard reaching that high score and becoming successful on youtube. The factors that determine your success are views, grade, and uploads based on the data. Channel type or name have little to no affect on any youtuber success .Based on these datasets it can be also infered that Entertainment youtubers are popular and have a stronger presence then any other category on Youtube.
 
 
 
-Based on these datasets it can be infered that Entertainment youtubers are popular and have a stronger presence then any other category on Youtube.
+
 
 
 
