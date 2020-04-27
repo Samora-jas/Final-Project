@@ -15,6 +15,7 @@ library(DataComputing)
 library(tidyr)
 library(lubridate)
 library(ggplot2)
+install.packages("party")
 ```
 
 * Guiding Question - What are the factors that make a youtube channel successful. 
@@ -61,11 +62,17 @@ USvideos_modified%>%
 
 
 
-# A simple summary of the count of number of youtube channels.
+# A simple summary of the count of number of youtube channels in database.
 ```{r}
 YouTube %>%
   summarise(count = n())
 ```
+# A simple summary of the count of number of youtube videos in the database.
+```{r}
+USvideos_modified %>%
+  summarise(count = n())
+```
+
 # First 20 videos on Youtube (brief description on the content on Youtube)
 ```{r}
 USvideos_modified %>%
@@ -77,7 +84,7 @@ USvideos_modified %>%
 YouTube %>% 
   select(userID, `userID-href`)
 ```
-# A tidy form of the data to show that userId is directly correlated to name. It also give a sense of what uploads users are making
+# A tidy form of the data to show that userId is directly correlated to name. It also give a sense of the number of uploads users are making.
 ```{r}
 Youtuber <- 
   YouTube %>%
@@ -89,12 +96,14 @@ print(Youtuber)
 
 
 
-#The maximum and mininum number of views per channel are shown in the figure below.
+#The average, maximum, and mininum number of views per channel are shown in the figure below.
 ```{r}
+YoutubeStats<-
 YouTube %>%
   summarise(averViews  = mean(videoviews, na.rm=TRUE),
             greatestViews = max(videoviews, na.rm = TRUE),
             leastViews = min(videoviews, na.rm=TRUE))
+print(YoutubeStats)
 ```
 
 ```{r}
@@ -109,10 +118,17 @@ YouTube %>%
 # From the figure above it can be inferred that the higher the views and subscribers the higher the channel's revenue.
 
 
+#At first glance at looking at YouTube.csv the monthly and yearly earning confused me a bit. I thought for a second it was a difference. By changing the"-" to "to" it elaborates the data further.
+```{r}
 
+YouTube %>%
+  mutate(YearlyEarnings = gsub("-", "to", YearlyEarnings),
+         (MonthlyEarnings = gsub("-", "to", MonthlyEarnings)))
+```
 
-
-
+```{r}
+ 
+```
 
 
 
